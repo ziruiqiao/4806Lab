@@ -12,12 +12,12 @@ public class BuddyInfoTest {
 
     @Before
     public void setUp() {
-        buddyInfoUnderTest = new BuddyInfo("name", "phoneNumber", 1);
+        buddyInfoUnderTest = new BuddyInfo(1, "name", "phoneNumber");
     }
 
     @Test
     public void testToString() {
-        assertEquals("\n{Name: name, Phone Number: phoneNumber}", buddyInfoUnderTest.toString());
+        assertEquals("{Id: 1, Name: name, Phone Number: phoneNumber}", buddyInfoUnderTest.toString());
     }
 
     @Test

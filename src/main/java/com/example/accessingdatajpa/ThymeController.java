@@ -21,7 +21,7 @@ public class ThymeController {
     public String getAddressBook(@RequestParam(value = "id", defaultValue = "1")
                                      Integer id, Model model) {
         AddressBook abById = labService.getAbById(id);
-        model.addAttribute("addressBook", abById.toStr());
+        model.addAttribute("addressBook", abById);
         return "greeting";
     }
 }

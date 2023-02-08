@@ -23,7 +23,7 @@ public class AddressBookTest {
     @Test
     public void testAddBuddy() {
         // Setup
-        final BuddyInfo buddy = new BuddyInfo("mike", "testNumber", 1);
+        final BuddyInfo buddy = new BuddyInfo(1, "mike", "testNumber");
 
         // Run the test
         final boolean result = addressBookUnderTest.addBuddy(buddy);
@@ -35,8 +35,8 @@ public class AddressBookTest {
     @Test
     public void getBuddies() {
         // Setup
-        final BuddyInfo buddy1 = new BuddyInfo("mike", "testNumber", 1);
-        final BuddyInfo buddy2 = new BuddyInfo("tony", "testNumber2", 2);
+        final BuddyInfo buddy1 = new BuddyInfo(1, "mike", "testNumber");
+        final BuddyInfo buddy2 = new BuddyInfo(2, "tony", "testNumber2");
         addressBookUnderTest.addBuddy(buddy1);
         addressBookUnderTest.addBuddy(buddy2);
         Collection<BuddyInfo> buddies = addressBookUnderTest.getAddressBook();

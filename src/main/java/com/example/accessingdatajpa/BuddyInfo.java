@@ -9,10 +9,10 @@ public class BuddyInfo {
     private String name;
     private String phoneNumber;
 
-    @JsonBackReference
-    @ManyToOne
-    @JoinColumn(name = "addressBook_id")
-    private AddressBook addressBook;
+//    @JsonBackReference
+//    @ManyToOne
+//    @JoinColumn(name = "addressBook_id")
+//    private AddressBook addressBook;
     @Id
     @GeneratedValue
     private Integer id;
@@ -22,23 +22,10 @@ public class BuddyInfo {
         this.phoneNumber = phoneNumber;
     }
 
-    public BuddyInfo(String name, String phoneNumber, Integer id) {
+    public BuddyInfo(Integer id, String name, String phoneNumber) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.id = id;
-    }
-
-    public BuddyInfo(String name, String phoneNumber, AddressBook addressBook) {
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-        this.addressBook = addressBook;
-    }
-
-    public BuddyInfo(Integer id, String name, String phoneNumber, AddressBook addressBook) {
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-        this.id = id;
-        this.addressBook = addressBook;
     }
 
     public BuddyInfo() {
@@ -72,13 +59,5 @@ public class BuddyInfo {
     @Override
     public String toString() {
         return "{Id: " + this.id + ", Name: " + this.name + ", Phone Number: " + this.phoneNumber + "}";
-    }
-
-    public AddressBook getAddressBook() {
-        return addressBook;
-    }
-
-    public void setAddressBook(AddressBook addressBook) {
-        this.addressBook = addressBook;
     }
 }

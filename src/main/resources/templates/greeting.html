@@ -5,6 +5,13 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<p th:text="'Hello, ' + ${addressBook} + '!'" />
+<p th:text="'addressBook id: ' + ${addressBook.id} + '!'" />
+<tr th:each="buddy: ${addressBook.addressBook}">
+  <p>------------------------------------------------</p>
+  <span>buddy id: </span><td th:text="${buddy.id}"/><br>
+  <span>buddy name: </span><td th:text="${buddy.name}"/><br>
+  <span>buddy tel: </span><td th:text="${buddy.phoneNumber}"/><br>
+  <p>------------------------------------------------</p>
+</tr>
 </body>
 </html>

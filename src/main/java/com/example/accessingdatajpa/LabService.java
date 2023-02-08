@@ -28,12 +28,12 @@ public class LabService {
         Optional<AddressBook> byId = abr.findById(id);
         addressBook = byId.get();
         addressBook.setId(id);
-        Iterable<BuddyInfo> all = br.findAllByAddressBookId(id);
-
-        for (BuddyInfo buddy : all) {
-            addressBook.addBuddy(buddy);
-        }
-        System.out.println("addressBook = " + addressBook);
+//        Iterable<BuddyInfo> all = br.findAllByAddressBookId(id);
+//
+//        for (BuddyInfo buddy : all) {
+//            addressBook.addBuddy(buddy);
+//        }
+        System.out.println("addressBook = " + addressBook.toStr());
         return addressBook;
     }
 
@@ -42,17 +42,14 @@ public class LabService {
         List<BuddyInfo> buddyInfos = new ArrayList<>();
 
         AddressBook save = abr.save(addressBook);
-        for (BuddyInfo buddy : buddies) {
-            buddy.setAddressBook(save);
-        }
-        Iterable<BuddyInfo> save2 = br.saveAll(buddies);
+//        Iterable<BuddyInfo> save2 = br.saveAll(buddies);
         System.out.println("addressBook = " + save.toStr());
 
         return save;
     }
 
     public Boolean delAddressBook(Integer id) {
-        br.deleteAllByAddressBook_Id(id);
+        //br.deleteAllByAddressBook_Id(id);
         abr.deleteById(id);
         return true;
     }
