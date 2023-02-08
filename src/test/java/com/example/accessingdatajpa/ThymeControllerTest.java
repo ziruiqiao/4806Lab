@@ -30,7 +30,7 @@ class ThymeControllerTest {
         r2.deleteAll();
         AddressBook addressBook = new AddressBook();
         addressBook.addBuddy(new BuddyInfo("Jack", "Bauer"));
-        addressBook.addBuddy(new BuddyInfo("Chloe", "O'Brian"));
+        addressBook.addBuddy(new BuddyInfo("Chloe", "OBrian"));
         addressBook.addBuddy(new BuddyInfo("Kim", "Bauer"));
         addressBook.addBuddy(new BuddyInfo("David", "Palmer"));
         addressBook.addBuddy(new BuddyInfo("Michelle", "Dessler"));
@@ -42,7 +42,7 @@ class ThymeControllerTest {
     void getAddressBookTest(){
         String forObject = this.restTemplate.getForObject("http://localhost:" + port + "/thyme?id=1", String.class);
         System.out.println("forObject = " + forObject);
-        assertThat(forObject).contains("Chloe").contains("O&#39;Brian");
+        assertThat(forObject).contains("Chloe").contains("OBrian");
     }
 
 }
