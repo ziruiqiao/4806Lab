@@ -15,12 +15,11 @@ public class LabController {
 
     @GetMapping("/get/{id}")
     public AddressBook getAddressBook(@PathVariable("id") Integer id) {
-        AddressBook abById = labService.getAbById(id);
-        return abById;
+        return labService.getAbById(id);
     }
 
     @PostMapping("/post")
-    public Boolean postAddressBook(@RequestBody AddressBook addressBook) {
+    public AddressBook postAddressBook(@RequestBody AddressBook addressBook) {
         return labService.postAddressBook(addressBook);
     }
 

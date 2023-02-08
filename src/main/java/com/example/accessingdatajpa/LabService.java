@@ -24,7 +24,7 @@ public class LabService {
     }
 
     public AddressBook getAbById(Integer id) {
-        AddressBook addressBook = new AddressBook();
+        AddressBook addressBook;
         Optional<AddressBook> byId = abr.findById(id);
         addressBook = byId.get();
         addressBook.setId(id);
@@ -37,7 +37,7 @@ public class LabService {
         return addressBook;
     }
 
-    public Boolean postAddressBook(AddressBook addressBook) {
+    public AddressBook postAddressBook(AddressBook addressBook) {
         Collection<BuddyInfo> buddies = addressBook.getAddressBook();
         List<BuddyInfo> buddyInfos = new ArrayList<>();
 
@@ -48,7 +48,7 @@ public class LabService {
         Iterable<BuddyInfo> save2 = br.saveAll(buddies);
         System.out.println("addressBook = " + save.toStr());
 
-        return true;
+        return save;
     }
 
     public Boolean delAddressBook(Integer id) {

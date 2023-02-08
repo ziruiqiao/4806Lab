@@ -3,6 +3,7 @@ package com.example.accessingdatajpa;
 import com.thoughtworks.qdox.model.expression.Add;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,14 +36,36 @@ class LabControllerTest {
 
     @AfterEach
     void tearDown() {
+
     }
 
     @Test
-    public void contextLoads() throws Exception{
+    @Order(4)
+    public void contextLoads(){
         assertThat(controller).isNotNull();
     }
 
     @Test
+    @Order(1)
+    void postAddressBook() {
+        AddressBook nuladr =  new AddressBook();
+        AddressBook forObject = this.restTemplate.getForObject("http://localhost:" + port + "/get/2", AddressBook.class);
+        assertThat(forObject.toStr()).isEqualTo(nuladr.toStr());
+
+        AddressBook addressBook = new AddressBook();
+        addressBook.addBuddy(new BuddyInfo(7,"Mike", "1234", addressBook));
+        addressBook.addBuddy(new BuddyInfo(8, "Tony", "2345", addressBook));
+        addressBook.addBuddy(new BuddyInfo(6, "Go", "3456", addressBook));
+        addressBook.setId(2);
+        AddressBook ret = this.restTemplate.postForObject("http://localhost:" + port + "/post", addressBook, AddressBook.class);
+        assertThat(ret).isInstanceOf(AddressBook.class);
+
+        AddressBook forObject2 = this.restTemplate.getForObject("http://localhost:" + port + "/get/2", AddressBook.class);
+        assertThat(forObject2.toStr()).isEqualTo(ret.toStr());
+    }
+
+    @Test
+    @Order(2)
     void getAddressBook() {
         AddressBook forObject = this.restTemplate.getForObject("http://localhost:" + port + "/get/1", AddressBook.class);
         System.out.println("forObject = " + forObject.toStr());
@@ -50,24 +73,7 @@ class LabControllerTest {
     }
 
     @Test
-    void postAddressBook() {
-//        AddressBook nuladr =  new AddressBook();
-//        AddressBook forObject = this.restTemplate.getForObject("http://localhost:" + port + "/get/2", AddressBook.class);
-//        assertThat(forObject.toStr()).isEqualTo(nuladr.toStr());
-//
-//        AddressBook addressBook = new AddressBook();
-//        addressBook.addBuddy(new BuddyInfo(7,"Mike", "1234", addressBook));
-//        addressBook.addBuddy(new BuddyInfo(8, "Tony", "2345", addressBook));
-//        addressBook.addBuddy(new BuddyInfo(6, "Go", "3456", addressBook));
-//        addressBook.setId(2);
-//        Boolean ret = this.restTemplate.postForObject("http://localhost:" + port + "/post", addressBook, Boolean.class);
-//        assertThat(ret).isEqualTo(true);
-//
-//        AddressBook forObject2 = this.restTemplate.getForObject("http://localhost:" + port + "/get/2", AddressBook.class);
-//        assertThat(forObject2.toStr()).isEqualTo(addressBook.toStr());
-    }
-
-    @Test
+    @Order(3)
     void delAddressBook() {
         AddressBook forObject = this.restTemplate.getForObject("http://localhost:" + port + "/get/1", AddressBook.class);
         System.out.println("forObject = " + forObject.toStr());
