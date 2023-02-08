@@ -11,10 +11,13 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Rollback
 class ThymeControllerTest {
     @Value(value="${local.server.port}")
     private int port;
@@ -40,7 +43,12 @@ class ThymeControllerTest {
 
     @Test
     void getAddressBookTest(){
-        String forObject = this.restTemplate.getForObject("http://localhost:" + port + "/thyme?id=1", String.class);
+        setUp();
+        List<AddressBook> all = r2.findAllBy();
+        System.out.println("thymeleaf-----------------------------------------------------------------------------------------------------------");
+        //System.out.println("all = " + all);
+        //System.out.println(all.get(0).getId());
+        String forObject = this.restTemplate.getForObject("http://localhost:" + port + "/thyme?id=7", String.class);
         System.out.println("forObject = " + forObject);
         assertThat(forObject).contains("Chloe").contains("OBrian");
     }
