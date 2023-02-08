@@ -1,2 +1,2 @@
 # 4806Lab
-for the usage of SYSC4806 lab
+[![Java CI with Maven](https://github.com/ziruiqiao/4806Lab/actions/workflows/maven.yml/badge.svg)](https://github.com/ziruiqiao/4806Lab/actions/workflows/maven.yml)
