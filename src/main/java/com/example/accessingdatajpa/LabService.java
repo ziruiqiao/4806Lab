@@ -25,12 +25,15 @@ public class LabService {
 
     public AddressBook getAbById(Integer id) {
         AddressBook addressBook = new AddressBook();
+        Optional<AddressBook> byId = abr.findById(id);
+        addressBook = byId.get();
         addressBook.setId(id);
         Iterable<BuddyInfo> all = br.findAllByAddressBookId(id);
 
         for (BuddyInfo buddy : all) {
             addressBook.addBuddy(buddy);
         }
+        System.out.println("addressBook = " + addressBook);
         return addressBook;
     }
 

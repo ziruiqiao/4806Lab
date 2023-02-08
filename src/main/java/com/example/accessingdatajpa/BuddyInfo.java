@@ -34,6 +34,13 @@ public class BuddyInfo {
         this.addressBook = addressBook;
     }
 
+    public BuddyInfo(Integer id, String name, String phoneNumber, AddressBook addressBook) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.id = id;
+        this.addressBook = addressBook;
+    }
+
     public BuddyInfo() {
 
     }
