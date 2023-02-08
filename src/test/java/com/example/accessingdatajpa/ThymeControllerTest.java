@@ -25,7 +25,7 @@ class ThymeControllerTest {
     void getAddressBookTest(){
         String forObject = this.restTemplate.getForObject("http://localhost:" + port + "/thyme?id=1", String.class);
         System.out.println("forObject = " + forObject);
-        assertThat(forObject).isInstanceOf(String.class);
+        assertThat(forObject).contains("Name: Chloe, Phone Number: O&#39;Brian}");
     }
 
 }
