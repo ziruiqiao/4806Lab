@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New</title>
+    <script>
+        var counter = 0;
+        function addBuddyForm() {
+            counter++;
+            console.log("counter: " + counter);
+            let content = document.createElement('div');
+            content.innerHTML = "<br><div class=\"buddy-info\">\n" +
+                "      <label>Buddy Name</label><br>\n" +
+                "      <input type=\"text\" name=\"addressBook[" + counter + "].name\" placeholder=\"Please Input buddy info\"><br>\n" +
+                "      <label>Buddy Phone Number</label><br>\n" +
+                "      <input type=\"text\" name=\"addressBook[" + counter + "].phoneNumber\" placeholder=\"Please Input buddy phone number\"><br>\n" +
+                "    </div>";
+
+            let btn = document.getElementById("add-buddy");
+            btn.parentNode.insertBefore(content, btn);
+            return false;
+        }
+    </script>
+    <style>
+        .buddy-info{
+            border: coral 5px solid;
+            width: 60%;
+        }
+        input[type="text"]{
+            width: 80%;
+        }
+    </style>
+</head>
+<body>
+<form method="post" action="http://localhost:8080/add">
+    <fieldset>
+        <legend>Create Address Book</legend>
+        <div id="inputs">
+            <div class="buddy-info">
+                <label>Buddy Name</label><br>
+                <input type="text" name="addressBook[0].name" placeholder="Please Input buddy info"><br>
+                <label>Buddy Phone Number</label><br>
+                <input type="text" name="addressBook[0].phoneNumber" placeholder="Please Input buddy phone number"><br>
+            </div>
+            <button id="add-buddy" onclick="addBuddyForm()" type="button">add a buddy</button>
+        </div>
+        <input type="submit">
+    </fieldset>
+</form>
+</body>
+</html>

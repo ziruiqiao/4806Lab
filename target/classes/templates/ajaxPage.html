@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX Page</title>
+    <script>
+        function setOnChange() {
+            document.getElementById("abId").onchange = function(){send()};
+        }
+        var xmlhttp;
+        function searchAddressBook(url, func){
+            let id = document.getElementById("abId").value;
+            if((isNaN(id) && !1) || parseInt(id) < 0) {
+                alert("Input must be positive integer");
+            }
+            let param = parseInt(id);
+            if (window.XMLHttpRequest)
+            {// IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp=new XMLHttpRequest();
+            } else {// IE6, IE5
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange=func;
+            xmlhttp.open("GET",url+param,true);
+            xmlhttp.send();
+        }
+        function send()
+        {
+            searchAddressBook("http://localhost:8080/get/",function()
+            {
+                if (xmlhttp.readyState===4 && xmlhttp.status===200)
+                {
+                    let addrBook = JSON.parse(xmlhttp.responseText);
+                    let content = "<p>addressBook id: " + addrBook.id + "</p>\n";
+                    let buddyList = addrBook.addressBook;
+                    for(let i=0; i<buddyList.length; i++){
+                        let eachBuddy = "<div>\n" +
+                        "  <p>------------------------------------------------</p>\n" +
+                        "  <span>buddy id: </span><span>" + buddyList[i].id + "</span><br>\n" +
+                        "  <span>buddy name: </span><span>" + buddyList[i].name + "</span><br>\n" +
+                        "  <span>buddy tel: </span><span>" + buddyList[i].phoneNumber + "</span><br>\n" +
+                        "  <p>------------------------------------------------</p>\n" +
+                        "</div>";
+                        content += eachBuddy;
+                    }
+                    document.getElementById("result").innerHTML=content;
+                }
+            });
+        }
+    </script>
+</head>
+<body onload="setOnChange()">
+    <label>Please input the id of Address Book:</label>
+    <input id="abId" type="number" placeholder="input number">
+    <div id="result"></div>
+</body>
+</html>
