@@ -76,7 +76,7 @@ class LabControllerTest {
     @Order(2)
     void getAddressBook() {
         AddressBook forObject = this.restTemplate.getForObject("http://localhost:" + port + "/get/1", AddressBook.class);
-        System.out.println("forObject = " + forObject.toStr());
+        //System.out.println("forObject = " + forObject.toStr());
         assertThat(forObject).isInstanceOf(AddressBook.class);
     }
 
